@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match images using OpenCV.js</title>
+</head>
+
+<body>
+    <select id="detector">
+        <option value="0" selected>Detector 0</option>
+        <option value="1">Detector 1</option>
+    </select>
+
+    <select id="match">
+        <option value="0">Match 0</option>
+        <option value="1" selected>Match 1</option>
+    </select>
+
+    <select id="distance">
+        <option value="0.75">Distance 0.75</option>
+        <option value="1.0">Distance 1.0</option>
+    </select>
+
+    <select id="knn_distance">
+        <option value="0.5">KNN Distance 0.5</option>
+        <option value="0.75" selected>KNN Distance 0.75</option>
+    </select>
+    <br>
+    <img id="form" src="form.jpg" alt="">
+    <img id="scanned-form" src="scanned-form.jpg" alt="">
+    <canvas id="imageCompareMatches"></canvas>
+    <canvas id="imageAligned"></canvas>
+    <script async src="opencv.js" id="opencvjs" onload="main()"></script>
+    <script src="app.js"></script>
+    <script>
+
+        async function main() {
+            //main();
+            console.log('OpenCV.js is ready');
+
+            cv['onRuntimeInitialized'] = () => {
+                console.log(cv.getBuildInformation());
+                console.log(cv);
+                Align_img();
+                // Add event listeners to the <select> elements
+                document.getElementById('detector').addEventListener('change', Align_img);
+                document.getElementById('match').addEventListener('change', Align_img);
+                document.getElementById('distance').addEventListener('change', Align_img);
+                document.getElementById('knn_distance').addEventListener('change', Align_img);
+            }
+        }
+    </script>
+
+</body>
+
+
+</html>
